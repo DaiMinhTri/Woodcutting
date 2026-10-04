@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lumberjacking", "Lumberjacking\Lumberjacking.csproj", "{3FED9927-9CAF-4D3B-B992-44F009724EB9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Woodcutting", "Woodcutting\Woodcutting.csproj", "{3FED9927-9CAF-4D3B-B992-44F009724EB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
