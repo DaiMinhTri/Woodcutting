@@ -18,7 +18,7 @@ namespace Woodcutting;
 public class Woodcutting : BaseUnityPlugin
 {
 	private const string ModName = "dmtWoodcutting";
-	private const string ModVersion = "1.0.0";
+	private const string ModVersion = "1.1.0";
 	private const string ModGUID = "dmtWoodcutting";
 
 	private static readonly ConfigSync configSync = new(ModGUID) { DisplayName = ModName, CurrentVersion = ModVersion };
@@ -51,6 +51,8 @@ public class Woodcutting : BaseUnityPlugin
 	internal static ConfigEntry<Toggle> enableXpBoost = null!;
 	internal static ConfigEntry<int> xpBoostSkillLevel = null!;
 	internal static ConfigEntry<float> xpBoostMultiplier = null!;
+	internal static ConfigEntry<Toggle> enableLumberjack = null!;
+	internal static ConfigEntry<int> lumberjackSkillLevel = null!;
 
 	private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description, bool synchronizedSetting = true)
 	{
@@ -87,20 +89,22 @@ public class Woodcutting : BaseUnityPlugin
 		showHpOnAim = config("3 - HP Display", "Show HP On Aim", Toggle.On, "Show the current and maximum HP of a tree, stump or log when aiming at it.");
 		hpDisplaySkillLevel = config("3 - HP Display", "HP Display Skill Level", 10, new ConfigDescription("Woodcutting skill level at which HP is shown when aiming. 0 = always.", new AcceptableValueRange<int>(0, 100)));
 		enableAxeCombo = config("4 - Axe Combo", "Enable Axe Combo", Toggle.On, "Makes the axe attack chain uninterruptible when hitting trees (the chain is not reset on hits).");
-		axeComboSkillLevel = config("4 - Axe Combo", "Axe Combo Skill Level", 40, new ConfigDescription("Woodcutting skill level at which the axe combo activates. 0 = active from level 0 while enabled.", new AcceptableValueRange<int>(0, 100)));
+		axeComboSkillLevel = config("4 - Axe Combo", "Axe Combo Skill Level", 50, new ConfigDescription("Woodcutting skill level at which the axe combo activates. 0 = active from level 0 while enabled.", new AcceptableValueRange<int>(0, 100)));
 		enableFellerStamina = config("5 - Felling Stamina", "Enable Felling Stamina", Toggle.On, "Gain stamina each time you fell a standing tree.");
-		fellerStaminaStartLevel = config("5 - Felling Stamina", "Stamina Start Level", 30, new ConfigDescription("Woodcutting level at which felling a standing tree starts granting stamina; the amount grows linearly up to 'Max Stamina At Level 100'.", new AcceptableValueRange<int>(0, 100)));
+		fellerStaminaStartLevel = config("5 - Felling Stamina", "Stamina Start Level", 40, new ConfigDescription("Woodcutting level at which felling a standing tree starts granting stamina; the amount grows linearly up to 'Max Stamina At Level 100'.", new AcceptableValueRange<int>(0, 100)));
 		fellerStaminaMax = config("5 - Felling Stamina", "Max Stamina At Level 100", 15f, new ConfigDescription("Stamina gained per felled standing tree at level 100 (0 at 'Stamina Start Level', linear in between).", new AcceptableValueRange<float>(0f, 100f)));
 		enableFellingBlow = config("6 - Felling Blow", "Enable Felling Blow", Toggle.On, "Chance that a standing tree falls in a single hit.");
-		fellingBlowStartLevel = config("6 - Felling Blow", "Felling Blow Start Level", 50, new ConfigDescription("Woodcutting level at which the one-hit fell chance starts growing; it reaches 'Max Chance At Level 100' at level 100.", new AcceptableValueRange<int>(0, 100)));
+		fellingBlowStartLevel = config("6 - Felling Blow", "Felling Blow Start Level", 60, new ConfigDescription("Woodcutting level at which the one-hit fell chance starts growing; it reaches 'Max Chance At Level 100' at level 100.", new AcceptableValueRange<int>(0, 100)));
 		fellingBlowMaxChance = config("6 - Felling Blow", "Max Chance At Level 100", 30f, new ConfigDescription("Percent chance at level 100 to fell a standing tree with a single hit (0 at 'Felling Blow Start Level', linear in between).", new AcceptableValueRange<float>(0f, 100f)));
 		enableAxeConservation = config("7 - Axe Conservation", "Enable Axe Conservation", Toggle.On, "Chance that hitting a tree or a log does not cost axe durability.");
-		axeConservationSkillLevel = config("7 - Axe Conservation", "Axe Conservation Skill Level", 60, new ConfigDescription("Woodcutting skill level at which axe conservation activates.", new AcceptableValueRange<int>(0, 100)));
+		axeConservationSkillLevel = config("7 - Axe Conservation", "Axe Conservation Skill Level", 70, new ConfigDescription("Woodcutting skill level at which axe conservation activates.", new AcceptableValueRange<int>(0, 100)));
 		axeConservationChance = config("7 - Axe Conservation", "Chance", 30f, new ConfigDescription("Percent chance that a tree or log hit costs no durability at 'Axe Conservation Skill Level'. Grows linearly to 'Max Chance At Level 100' at level 100.", new AcceptableValueRange<float>(0f, 100f)));
 		axeConservationMaxChance = config("7 - Axe Conservation", "Max Chance At Level 100", 50f, new ConfigDescription("Percent chance that a tree or log hit costs no durability at skill level 100 (linear from 'Chance' at 'Axe Conservation Skill Level').", new AcceptableValueRange<float>(0f, 100f)));
 		enableXpBoost = config("8 - XP Boost", "Enable XP Boost", Toggle.On, "Boost Woodcutting XP gain at high skill levels.");
 		xpBoostSkillLevel = config("8 - XP Boost", "XP Boost Skill Level", 80, new ConfigDescription("Woodcutting skill level at which the XP multiplier starts applying.", new AcceptableValueRange<int>(0, 100)));
 		xpBoostMultiplier = config("8 - XP Boost", "XP Multiplier", 1.5f, new ConfigDescription("Multiplier applied to Woodcutting XP at or above 'XP Boost Skill Level'.", new AcceptableValueRange<float>(1f, 5f)));
+		enableLumberjack = config("9 - Lumberjack", "Enable Lumberjack", Toggle.On, "Trees felled with melee hits fall in the direction you are facing.");
+		lumberjackSkillLevel = config("9 - Lumberjack", "Lumberjack Skill Level", 30, new ConfigDescription("Woodcutting skill level at which felled trees fall in the direction you face. 0 = always while enabled.", new AcceptableValueRange<int>(0, 100)));
 
 		stumpSkillLevel.SettingChanged += (_, _) => ApplyAll();
 		stumpHp.SettingChanged += (_, _) => ApplyAll();

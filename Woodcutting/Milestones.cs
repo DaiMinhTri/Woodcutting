@@ -72,6 +72,34 @@ public static class Milestones
 		pendingActive = true;
 	}
 
+	internal static void ApplyLumberjackDirection(HitData hit)
+	{
+		if (Woodcutting.enableLumberjack.Value != Woodcutting.Toggle.On || hit.m_ranged)
+		{
+			return;
+		}
+
+		Player player = Player.m_localPlayer;
+		if (!player || hit.GetAttacker() != player)
+		{
+			return;
+		}
+
+		if (Woodcutting.GetWoodCuttingSkillLevel() < Woodcutting.lumberjackSkillLevel.Value)
+		{
+			return;
+		}
+
+		Vector3 dir = player.GetLookDir();
+		dir.y = 0f;
+		if (dir.sqrMagnitude < 0.0001f)
+		{
+			return;
+		}
+
+		hit.m_dir = dir.normalized;
+	}
+
 	internal static void CheckFelledTree(Player player)
 	{
 		if (!pendingActive)
@@ -144,6 +172,7 @@ public static class Milestones
 		{
 			TrackFelledTree(hit, __instance);
 			ArmConservation(hit);
+			ApplyLumberjackDirection(hit);
 		}
 	}
 
