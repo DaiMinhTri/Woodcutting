@@ -2,7 +2,7 @@
   "name": "dmtWoodcutting",
   "description": "Vanilla Woodcutting skill progression: smooth perks every point plus milestones - HP on aim at 10, 1 HP stumps at 20, lumberjack at 30, stamina per felled tree at 40, axe combo at 50, one-hit felling at 60, axe conservation at 70 and XP boost at 80.",
   "version_number": "1.1.0",
-  "website_url": "https://github.com/DaiMinhTri/woodcutting",
+  "website_url": "https://github.com/DaiMinhTri/Woodcutting",
   "dependencies": [
     "denikson-BepInExPack_Valheim-5.4.2351"
   ]

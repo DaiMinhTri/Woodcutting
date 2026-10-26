@@ -4,7 +4,5 @@
     <VALHEIM_INSTALL Condition="!Exists('$(VALHEIM_INSTALL)')">D:\SteamLibrary\steamapps\common\Valheim</VALHEIM_INSTALL>
     <BEPINEX_PATH>$(AppData)\com.kesomannen.gale\valheim\profiles\main\BepInEx</BEPINEX_PATH>
     <VALHEIM_MANAGED>$(VALHEIM_INSTALL)\valheim_Data\Managed</VALHEIM_MANAGED>
-    <r2ModManPath>$(AppData)\com.kesomannen.gale\valheim\profiles</r2ModManPath>
-    <MOD_DEPLOYPATH>$(r2ModManPath)\main\BepInEx\plugins</MOD_DEPLOYPATH>
   </PropertyGroup>
 </Project>
