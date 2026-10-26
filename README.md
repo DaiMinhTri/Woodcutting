@@ -43,7 +43,6 @@ It uses the vanilla Woodcutting skill — no custom skill, vanilla XP rates and 
 | 70 | ×1.70 | 51% | +7% | on | 1 HP | on | +7.5 | on | 7.5% | **30%** | ×0.23 | ×1.0 |
 | 80 | ×1.80 | 44% | +8% | on | 1 HP | on | +10.0 | on | 15% | 37% | ×0.19 | **×1.5** |
 | 100 | ×2.00 | 30% | +10% | on | 1 HP | on | **+15** | on | **30%** | **50%** | ×0.13 | ×1.5 |
-| 100 | × | 2.00 | 30% | +10% | on | 1 HP | on | **+15** | on | **30%** | **50%** | × | 0.13 | × | 1.5 |
 
 Yield, fall damage, forest speed and log HP grow with **every** skill point. Stamina and felling blow grow linearly from their start level to 100. Milestone effects apply to already-existing stumps/logs the moment you cross the level.
 
